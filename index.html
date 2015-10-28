@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular Demo</title>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="js/controllers.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+
+<div class="main" ng-controller = "MyController">
+<section id="content">
+    <div class="container">
+      <div class="col-sm-3" ng-repeat="item in articles">
+        <div class="card blog-post">
+          <div class="bp-header">
+              <img src="images/{{item.image}}" alt="">
+                  
+              <a href="" class="bp-title">
+                  <h2>{{item.title}}</h2>
+              </a>
+          </div>
+        </div>
+        <div class="p-20">
+          {{item.description}}
+        </div>
+      </div>
+
+  <ul class="articlelist">
+    <li class="article cf" ng-repeat="item in articles">
+      <img ng-src="images/{{item.image}}" alt="Photo of {{item.name}}">
+      <div class="info">
+        <h2>{{item.name}}</h2>
+        <h3>{{item.reknown}}</h3>
+      </div>
+    </li>
+  </ul>
+
+</div>
+
+</section>
+</div>
+</body>
+</html>
