@@ -2999,6 +2999,7 @@ select[multiple].form-group-lg .form-control {
   padding: 6px 12px;
   font-size: 13px;
   line-height: 1.42857143;
+  margin: 0 5px 10px 0;
   border-radius: 2px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
