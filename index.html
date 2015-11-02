@@ -2,42 +2,87 @@
 <html lang="en" ng-app="Shale">
   <head>
     <meta charset="UTF-8">
-    <title>Angular Demo</title>
+    <title>Articles View</title>
     <script src="lib/angular/angular.min.js"></script>
     <script src="js/controllers.js"></script>  
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.css"></script>
+
   </head>
   <body>
-
-
-
-    <div class="main" ng-controller="MyController">
-      <section id="content">
-        <div class="row text-center">
-        <h1>Main heading</h1>
+    <div class="site__wrapper" ng-controller="MyController">
+        <div class="site__info">
+          <p>The news of the day</p>
         </div>
-        <div class="row">
+          <!--MOST RECENT -->
+          <div class="grid extra__padding hidden-sm hidden-xs">
+            <div class="site__info">
+              <p>Recently viewed</p>
+            </div>
+            <div class="" ng-repeat="recent in lastViewedList | reverse | limitTo:viewHistoryPerPage">
+              <div data-toggle="modal" href="#modal{{recent}}">
+                <div class="recent__image">
+                  <img ng-src="https://unsplash.it/400/120?image={{articles[recent].image}}" alt="">
+
+                  <div class="card__overlay card__overlay--indigo">
+                    <div class="card__overlay-content">
+                      <a href="" class="card__title">{{articles[recent].title}}</a>
+                      <ul class="card__meta card__meta--last">
+                        <li><a href="#0"><i class="fa fa-user"></i> {{articles[recent].author}}</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade" id="modal{{recent}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">{{articles[recent].title}}</h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="col-sm-4">
+                            <img ng-src="https://unsplash.it/200/120?image={{articles[recent].image}}" alt="">
+                          </div>
+                          <div class="col-sm-8">
+                            <p>{{articles[recent].description}}</p>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <br><br><br><br><br><br><br><br><br>
+          </div>
+          <!--REPEAT-->
+          <div class="grid" ng-repeat="item in articles | startFrom : currentPage*pageSize | limitTo:pageSize">
+              <div class="card" data-toggle="modal" href="#modal{{item._id}}" ng-click="addLastViewedList(item._id)">
+                <div class="card__image">
+                  <img ng-src="https://unsplash.it/400/300?image={{item.image}}" alt="">
+
+                  <div class="card__overlay card__overlay--blue">
+                    <div class="card__overlay-content">
+                      <a href="" class="card__title">{{item.title}}</a>
+                      <ul class="card__meta card__meta--last">
+                        <li><a href="#0"><i class="fa fa-user"></i> {{item.author}}</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+          <div class="site__info">
             <button type="button" class="btn btn-info pull-left p-10 m-10" ng-disabled="currentPage == 0" ng-click="prevPage()">Prev</button>
             <button type="button" class="btn btn-info pull-right p-10 m-10" ng-disabled="currentPage >= totalPages-1" ng-click="nextPage()">Next</button>
-        </div>
-
-          <div class="col-sm-4" ng-repeat="item in articles | startFrom : currentPage*pageSize | limitTo:pageSize">
-              <!-- Article Posts -->
-              <div class="card blog-post">
-                  <div class="bp-header">
-                      <img src="images/{{item.image}}" alt="">
-                          
-                      <a href="" class="bp-title">
-                          <h2>{{item.title}}</h2>
-                          <small>{{item.author}}</small>
-                      </a>
-                  </div>    
-                  <div class="p-20">
-                      {{item.description}}
-                  </div>
-              </div>
+            <p>Placeholder images are served from <a target="_blank" href="https://unsplash.it">www.unsplash.it</a></p>
+            <p>Handcrafted by <a target="_blank" href="https://andrew-rodriguez.com">Andrew</a></p>
           </div>
-      </section>
-    </div>
+      </div><!-- @end site__wrapper -->
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
